@@ -1,0 +1,260 @@
+<html>
+    <head>
+        <!-- <base href="/"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicketON</title>
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <h1>TicketOn</h1>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart fa-2x" style="color: white;"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </nav>
+    
+        <div class="cart-modal">
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <span class="close-cart">&times;</span>
+            </div>
+            <div class="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-total">
+                Total: R0
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    
+        <section class="hero">
+            <div class="hero-content">
+                <h2>RANDS CAPE TOWN</h2>
+                <p>Experience the best events in Khayelitsha</p>
+            </div>
+        </section>
+    
+        <main class="events-container">
+            <div class="events-grid">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3" alt="Weekend Party" class="event-image">
+                    <div class="event-details">
+                        <h3 class="event-title">Weekend Party Explosion</h3>
+                        <p class="event-date">December 14, 2024 | 8:00 PM</p>
+                        <div class="countdown-container">
+                            <div class="countdown">
+                                <span class="days">00</span>d 
+                                <span class="hours">00</span>h 
+                                <span class="minutes">00</span>m 
+                                <span class="seconds">00</span>s
+                            </div>
+                        </div>
+                        <p class="event-price">R150</p>
+                        <button class="buy-ticket">Buy Ticket</button>
+                    </div>
+                </div>
+    
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819" alt="DJ Night" class="event-image">
+                    <div class="event-details">
+                        <h3 class="event-title">DJ Maphorisa Live</h3>
+                        <p class="event-date">December 15, 2024 | 9:00 PM</p>
+                        <div class="countdown-container">
+                            <div class="countdown">
+                                <span class="days">00</span>d 
+                                <span class="hours">00</span>h 
+                                <span class="minutes">00</span>m 
+                                <span class="seconds">00</span>s
+                            </div>
+                        </div>
+                        <p class="event-price">R200</p>
+                        <button class="buy-ticket">Buy Ticket</button>
+                    </div>
+                </div>
+    
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745" alt="Ladies Night" class="event-image">
+                    <div class="event-details">
+                        <h3 class="event-title">Ladies Night Special</h3>
+                        <p class="event-date">December 16, 2024 | 7:00 PM</p>
+                        <div class="countdown-container">
+                            <div class="countdown">
+                                <span class="days">00</span>d 
+                                <span class="hours">00</span>h 
+                                <span class="minutes">00</span>m 
+                                <span class="seconds">00</span>s
+                            </div>
+                        </div>
+                        <p class="event-price">R100</p>
+                        <button class="buy-ticket">Buy Ticket</button>
+                    </div>
+                </div>
+    
+                <!-- Event 4 -->
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063" alt="Winter Festival" class="event-image">
+                    <div class="event-details">
+                        <h3 class="event-title">Winter Festival</h3>
+                        <p class="event-date">December 16, 2024 | 6:00 PM</p>
+                        <div class="countdown-container">
+                            <div class="countdown">
+                                <span class="days">00</span>d 
+                                <span class="hours">00</span>h 
+                                <span class="minutes">00</span>m 
+                                <span class="seconds">00</span>s
+                            </div>
+                        </div>
+                        <p class="event-price">R250</p>
+                        <button class="buy-ticket">Buy Ticket</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+        <footer>
+            <p>© 2023 TicketOn - Rands Cape Town. All rights reserved.</p>
+            <p>Location: Khayelitsha, Cape Town</p>
+            <p>Contact: +27 123 456 789</p>
+            
+            <div class="developer-qr">
+                <div class="qr-code">
+                    <img src="placeholder" alt="Developer 1 QR">
+                    <span>Developers Info</span>
+                </div>
+                <div class="qr-code">
+                    <img src="placeholder" alt="Developer 2 QR">
+                    <span>Developers Info</span>
+                </div>
+            </div>
+        </footer>
+    
+    <script>
+    let cart = [];
+    let cartCount = 0;
+    
+    // Cart functionality
+    document.querySelectorAll('.buy-ticket').forEach(button => {
+        button.addEventListener('click', () => {
+            const eventCard = button.closest('.event-details');
+            const eventTitle = eventCard.querySelector('.event-title').textContent;
+            const eventPrice = eventCard.querySelector('.event-price').textContent;
+            const price = parseInt(eventPrice.replace('R', ''));
+            
+            addToCart(eventTitle, price);
+            updateCartCount();
+            updateCartDisplay();
+        });
+    });
+    
+    function addToCart(title, price) {
+        cart.push({ title, price });
+        cartCount++;
+        updateCartCount();
+    }
+    
+    function updateCartCount() {
+        document.querySelector('.cart-count').textContent = cartCount;
+    }
+    
+    function updateCartDisplay() {
+        const cartItems = document.querySelector('.cart-items');
+        cartItems.innerHTML = '';
+        let total = 0;
+    
+        cart.forEach((item, index) => {
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                <span>${item.title}</span>
+                <span>R${item.price}</span>
+                <span class="remove-item" data-index="${index}">❌</span>
+            `;
+            cartItems.appendChild(cartItem);
+            total += item.price;
+        });
+    
+        document.querySelector('.cart-total').textContent = `Total: R${total}`;
+    }
+    
+    // Cart modal toggle
+    document.querySelector('.cart-icon').addEventListener('click', () => {
+        document.querySelector('.cart-modal').classList.add('active');
+    });
+    
+    document.querySelector('.close-cart').addEventListener('click', () => {
+        document.querySelector('.cart-modal').classList.remove('active');
+    });
+    
+    // Remove items from cart
+    document.querySelector('.cart-items').addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-item')) {
+            const index = parseInt(e.target.dataset.index);
+            cart.splice(index, 1);
+            cartCount--;
+            updateCartCount();
+            updateCartDisplay();
+        }
+    });
+    
+    // Checkout button
+    document.querySelector('.checkout-btn').addEventListener('click', () => {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        alert('Proceeding to checkout...');
+        // Add checkout logic here
+    });
+    
+    // Countdown functionality
+    function updateCountdown() {
+        const events = [
+            { date: "2024-12-14T20:00:00", element: document.querySelectorAll('.countdown')[0] },
+            { date: "2024-12-15T21:00:00", element: document.querySelectorAll('.countdown')[1] },
+            { date: "2024-12-16T19:00:00", element: document.querySelectorAll('.countdown')[2] },
+            { date: "2024-12-16T18:00:00", element: document.querySelectorAll('.countdown')[3] }
+        ];
+    
+        function calculateTimeLeft(eventDate) {
+            const total = Date.parse(eventDate) - Date.parse(new Date());
+            if (total < 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+            
+            const seconds = Math.floor((total/1000) % 60);
+            const minutes = Math.floor((total/1000/60) % 60);
+            const hours = Math.floor((total/(1000*60*60)) % 24);
+            const days = Math.floor(total/(1000*60*60*24));
+            
+            return { days, hours, minutes, seconds };
+        }
+    
+        function updateTimer() {
+            events.forEach(event => {
+                const t = calculateTimeLeft(event.date);
+                
+                if (event.element) {
+                    event.element.querySelector('.days').textContent = t.days.toString().padStart(2, '0');
+                    event.element.querySelector('.hours').textContent = t.hours.toString().padStart(2, '0');
+                    event.element.querySelector('.minutes').textContent = t.minutes.toString().padStart(2, '0');
+                    event.element.querySelector('.seconds').textContent = t.seconds.toString().padStart(2, '0');
+                }
+            });
+        }
+    
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    }
+    
+    // Call the countdown function when the page loads
+    document.addEventListener('DOMContentLoaded', updateCountdown);
+    </script>
+    
+    </body></html>
